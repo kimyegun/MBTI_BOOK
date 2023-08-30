@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import WritePage from './pages/WritePage';
 import PostPage from './pages/PostPage';
+import MainPage from './pages/MainPage';
 import {Helmet} from 'react-helmet-async';
 import Home from './pages/Home';
 import Question from './pages/Question';
@@ -25,14 +26,9 @@ const App = () => {
   <>
     <Helmet>
       <title>MBTI</title>
-
     </Helmet>
 
-
-
     <Routes>
-
-
       {/* mbti 검사 메인페이지 router */}
       <Route path="/Home" element={<Home />} />
       {/* 챗봇 */}
@@ -41,8 +37,10 @@ const App = () => {
       <Route path="/question" element={<Question />} />
       {/* mbti 검사 결과 router */}
       <Route path="/result" element={<Result />} />
-      {/* mbti 개시판 목록 router */}
+      {/* 소개목록 */}
       <Route path="/" element={<PostListPage />} />
+      {/* List 목록 */}
+      <Route path="/main" element={<MainPage />} />
       {/* 로그인 화면 router */}
       <Route path="/login" element={<LoginPage />} />
       {/* 회원가입 화면 router */}
@@ -53,12 +51,11 @@ const App = () => {
       <Route path='/Resultdetail' element={<Resultdetail/>}/>
 
       <Route path="/:username">
-        <Route index element={<PostListPage />} />
+        <Route index element={<PostListPage/>} />
         <Route path=":postId" element={<PostPage />} />
       </Route>
 
     </Routes>
-
   </>
 
   );

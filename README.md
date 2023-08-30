@@ -1,4 +1,4 @@
-# MBTI_Book
+# MBTI-World
 ✨ **React, MongoDB, Node.JS를 활용하여 제작한 mbti별 책 추천 웹서비스입니다!**
 
 ![CreatePlan](./logo/썸네일.png)<br>

@@ -48,9 +48,7 @@ const PostListContainer = () => {
       count={count}
       handleSetCount={handleSetCount}
     />
- 
 
-  
     </div>
 
   );

@@ -1,20 +1,19 @@
 import HeaderContainer from '../containers/common/HeaderContainer';
+import Footer from '../components/common/Footer';
 import PostListContainer from '../containers/posts/PostListContainer';
 import PaginationContainer from './../containers/posts/PaginationContainer';
-import HeaderBanner from '../components/banner/banner';
-import PortfolioComponent from '../components/posts/Portfoliocomponent'
+
 
 
 
 const PostListPage = () => {
   return (
     <>
-      <HeaderContainer />
-      <HeaderBanner/>
-      <PortfolioComponent/>
+     <HeaderContainer />
       <PostListContainer />
       <PaginationContainer/>
-    </>
+      <Footer/>
+     </>
   );
 };
 
