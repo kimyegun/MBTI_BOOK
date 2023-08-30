@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Responsive from './Responsive';
 import Button from './Button';
 import {Link} from 'react-router-dom'
-import main from '../../assets/mbti/mainlogo.png'
+import logo from '../../assets/mbti/logo.png';
 
 
 const Header = ({user, onLogout}) => {
@@ -11,8 +11,8 @@ const Header = ({user, onLogout}) => {
           <HeaderBlock>
             <Wrapper>
                 <Link to="/" className="logo">
-                <img src={main} alt='sad' width = '70px'/>
-                    MBTI_BOOK
+                <img src={logo} alt='sad' width = 'auto'/>
+                 
                 </Link>
                 {user ? (
                 <div className='right'>
@@ -51,23 +51,31 @@ const Wrapper = styled(Responsive)`
     height: 6rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */ /* 이 줄을 주석 처리하거나 삭제 */
     .logo {
         width: 80%;
         font-size: 4rem;
         font-weight: 800;
         letter-spacing: 2px;
-        text-align: center;
+        text-align: left; /* 텍스트 정렬을 왼쪽으로 변경 */
+        margin-right: auto; /* 오른쪽으로부터의 간격을 최대로 설정 */
+        margin-left: -15rem; /* 로고를 왼쪽으로 추가 이동 */
+        img {
+            width: 200px; /* 로고 이미지의 너비 설정 */
+            height: auto; /* 높이는 자동으로 조정 */
+        }
     }
     .center{
-        display: flex;
-        justify-items: center;
+        display:flex;
+        justify-items:center;
+
     }
 
-    .right {
-        display: flex;
-        align-items: center;
-    }
+   .right {
+      display:flex;
+      align-items:center;
+
+   }
 `;
 
 /**
