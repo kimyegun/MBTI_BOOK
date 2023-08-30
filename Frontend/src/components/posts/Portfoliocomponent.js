@@ -1,41 +1,47 @@
 import React from "react";
-import { Row, Col,  Card, CardBody } from "reactstrap";
 import styled from 'styled-components';
 
 const images = [
-  { src: require("../../assets/mbti/enfj.png"), title: '오션뷰', desc: '최고의오션뷰' },
-  { src: require("../../assets/mbti/enfj.png"), title: '일류 셰프', desc: '호텔 레스토랑에서 최고의 맛을 경험하세요' },
-  { src: require("../../assets/mbti/enfj.png"), title: '최고의 서비스', desc:'최고의 서비스를 호텔에서 경험하세요'},
-  { src: require("../../assets/mbti/enfj.png"), title:'다양한 activity program', desc:'호텔에서 다양한 액티비티 프로그램을 한번에 경험하세요'},
-  { src: require("../../assets/mbti/enfj.png"), title:'카지노', desc:'카지노를 이용하십시오'},
-  { src: require("../../assets/mbti/enfj.png"), title:'Bar', desc:'세상의 모든 술을 있습니다.'}
+  {src: require("../../assets/mbti/enfj.png"), title: 'ENFJ', desc: '열정적인 리더' },
+  {src: require("../../assets/mbti/enfp.png"), title: 'ENFP', desc: '자유로운 영혼의 활동가' },
+  {src: require("../../assets/mbti/entj.png"), title: 'ENTJ', desc:'당당한 비전을 가진 리더'},
+  {src: require("../../assets/mbti/entp.png"), title:'ENTP', desc:'끊임없이 도전하는 변화 추구자'},
+  {src: require("../../assets/mbti/esfj.png"), title:'ESFJ', desc:'친절하고 사교적인 조화 추구자'},
+  {src: require("../../assets/mbti/esfp.png"), title:'ESFP', desc:'재치있는 사교적 연예인'},
+  {src: require("../../assets/mbti/estj.png"), title: 'ESTJ', desc : '사실적이고 결단력 있는 관리자' },
+  {src :require ("../../assets/mbti/estp.png"),title :'ESTP ',desc :'모험을 즐기는 실용주의자' },
+  {src :require ("../../assets/mbti/infj.png"),title :'INFJ ',desc :'뛰어난 통찰력을 가진 옹호자'},
+  {src :require ("../../assets/mbti/infp.png"),title :'INFP ',desc :'사색에 빠진 중재자'},
+  {src :require ("../../assets/mbti/intj.png"),title :'INTJ ',desc :'독립적인 전략가'},
+  {src :require ("../../assets/mbti/intp.png"),title :'INTP ',desc :'논리적이고 창조적인 사색가'},
+  {src :require ("../../assets/mbti/isfj.png"),title :'ISFJ ',desc :"섬세한 수호자와 보호자"},
+  {src: require("../../assets/mbti/isfp.png"), title:'ISFP', desc:"예술가와 탐험가"},
+  {src: require("../../assets/mbti/istj.png"), title:'ISTJ', desc:'철저하고 신뢰성 있는 논리주의자'},
+  {src: require("../../assets/mbti/istp.png"), title:'ISTP', desc:'실용적인 문제 해결사'},
+
 ];
 
-const StyledImg = styled.img`
-    width :100%;
-    height :200px; /* 원하는 높이로 설정 */
-    object-fit :cover;
-`;
+
 
 const PortfolioComponent = () => {
   
   return (
     <div>
-      <div className="spacer">
-
-          <Row className="justify-content-center">
-            <Col md="7" className="text-center">
-              <h2 className="title">MBTI 유형별 소개</h2>
-              <h6 className="subtitle">
-                MBTI 16가지 성격 유형별 소개해드리겠습니다.
-              </h6>
-            </Col>
-          </Row>
-          <Row className="m-t-40">
+      <Spacer/>
+    
+      <TitleContainer>
+    <Title>MBTI 유형별 소개</Title>
+    <Subtitle>
+        MBTI 16가지 성격 유형별 소개해드리겠습니다.
+    </Subtitle>
+</TitleContainer>
+       
+          
+          <StyledRow className="m-t-40">
             {
               images.map((image,i) => (
-                <Col md="4" key={i}>
-                  <Card className="card-shadow">
+                <StyledCol md="4" key={i}>
+                  <StyledCard className="card-shadow">
                     <a href="#" className="img-ho">
                       {/* StyledImg 컴포넌트 사용 */}
                       <StyledImg
@@ -43,19 +49,80 @@ const PortfolioComponent = () => {
                         src={image.src}
                       />
                     </a>
-                    <CardBody>
+                    <StyledCardBody>
                       <h5 className="font-medium m-b-0">{image.title}</h5>
                       <p className="m-b-0 font-14">{image.desc}</p>
-                    </CardBody>
-                  </Card>
-                </Col>  
+                    </StyledCardBody>
+                  </StyledCard>
+                </StyledCol>  
               ))
             }
-          </Row>
-
+          </StyledRow>
+         
       </div>
-    </div>
+   
+    
   );
 };
 
 export default PortfolioComponent;
+
+const StyledImg = styled.img`
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+`;
+
+const StyledCard = styled.div`
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  margin-bottom: 20px;
+  max-width: 300px; // 카드의 최대 너비 설정
+  width: 300px; // 고정 너비 설정
+`;
+
+const StyledCardBody = styled.div`
+   padding: 15px;
+`;
+
+const StyledRow = styled.div`
+   display: flex;
+   flex-wrap: wrap; 
+   margin-right:-15px; 
+   margin-left:-15px;  
+   justify-content: center; // 여기 추가
+`;
+
+const StyledCol = styled.div`
+   flex-basis :0 ;
+   max-width :100% ;
+   padding-right :15px ; 
+   padding-left :15px ; 
+   
+    @media (min-width :576px) {
+        flex :0 0 auto ;
+        max-width :25% ; // 각 열이 차지하는 공간을 반응형으로 조절
+     }
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; 
+`;
+
+
+
+const Title = styled.h2`
+  text-align: center;
+`;
+
+const Subtitle = styled.h6`
+  text-align: center;
+`;
+
+const Spacer =styled.div`
+    height: 4rem;
+`;
