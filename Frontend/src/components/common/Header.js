@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 import Responsive from './Responsive';
 import Button from './Button';
-import {Link} from 'react-router-dom'
+import {Link, useLocation } from 'react-router-dom'
 import logo from '../../assets/mbti/logo.png';
 import React, { useState } from 'react';
-import { FaBars } from 'react-icons/fa';
-
 
 const Header = ({user, onLogout}) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const location = useLocation(); // 현재 경로 가져오기
 
     const handleUserClick = () => {
       setIsDropdownOpen(!isDropdownOpen);
     };
+
+
     return (
         <>
           <HeaderBlock>
@@ -20,21 +21,28 @@ const Header = ({user, onLogout}) => {
                 <Link to="/main" className="logo">
                 <img src={logo} alt='sad' width = 'auto'/>
                 </Link>
-                <Navigation>  
-            <NavLink to="/main">소개글</NavLink>     
-            <NavLink to="/">커뮤니티 게시판</NavLink>
-            <NavLink to="/chat">채팅</NavLink>
-            <NavLink to="/home">MBTI Test</NavLink>                  
+          <Navigation>
+          <NavLink to="/main" isActive={location.pathname === '/main'}>
+              소개글
+            </NavLink>
+            <NavLink to="/" isActive={location.pathname === '/'}>
+              커뮤니티 게시판
+            </NavLink>
+            <NavLink to="/chat" isActive={location.pathname === '/chat'}>
+              채팅
+            </NavLink>
+            <NavLink to="/home" isActive={location.pathname === '/home'}>
+              MBTI Test
+            </NavLink>
           </Navigation>
-                  
+  
+            
                 {user ? (
           <UserBlock>
-            <UserInfo onClick={handleUserClick}>{user.username}</UserInfo>
-            {isDropdownOpen && (
-              <DropdownMenu>
-                <Link onClick={onLogout}>로그아웃</Link>
-              </DropdownMenu>
-            )}
+            <UserInfo onClick={handleUserClick} isActive={isDropdownOpen}>{user.username}</UserInfo>
+<DropdownMenu isOpen={isDropdownOpen}>
+    <Link onClick={onLogout}>로그아웃</Link>
+</DropdownMenu>
           </UserBlock>
         ) : (
           <div className="right">
@@ -50,6 +58,9 @@ const Header = ({user, onLogout}) => {
 
 export default Header;
 
+
+
+
 const Navigation = styled.nav`
   display: flex;
   align-items: center;
@@ -58,11 +69,23 @@ const Navigation = styled.nav`
 
 const NavLink = styled(Link)`
 display: flex;
-align-items: center; /* 텍스트를 수직 중앙에 배치 */
-margin-right:5rem; /* 오른쪽 마진을 조절하여 NavLink 간격 조절 */
-white-space: nowrap; /* 텍스트를 한 줄로 출력 */
-font-size: 1.2rem;
+align-items: center;
+margin-right:5rem;
+white-space: nowrap;
+
+ /* 활성 상태 스타일 추가 */
+ color: ${props => (props.isActive ? '#00A5FF' : 'inherit')};
+ font-weight:${props => (props.isActive ? 'bold' : 'inherit')};
+
+ /* 호버 효과 추가 */
+ &:hover {
+  color: #00A5FF; // 예시 색상
+  text-decoration:none; // 밑줄 제거
+  cursor:pointer;
+ }
 `;
+
+
 
 const UserBlock = styled.div`
   display: flex;
@@ -120,30 +143,67 @@ const Spacer =styled.div`
 `;
 
 const UserInfo = styled.div`
-    width: 100%; /* 컨테이너의 너비를 최대로 설정 */
-    font-weight: 800;
-    margin-left: 450px;
-    display: flex; 
-    justify-content: flex-end; /* 컨텐츠를 오른쪽으로 정렬 */
+  width: 100%;
+  font-weight: 800;
+  margin-left: 450px;
+  display: flex; 
+  justify-content: flex-end;
+
+  /* 배경색 변경 */
+  background-color: ${props => props.isActive ? '#f8f9fa' : 'white'};
+
+   /* 호버 효과 추가 */
+   &:hover {
+    cursor:pointer;
+   }
+
+   /* 하단 표시 추가 */
+   border-bottom: ${props => props.isActive ? '2px solid black' : 'none'};
+
+   /* 하단 화살표 모양 추가 */
+   position:relative; // ::after 가상 요소의 위치를 조절하기 위해 relative 설정
+   &::after {
+     content:'';
+     position:absolute;
+     bottom:-10px; // 화살표 위치 조절
+     left:50%; // 중앙에 위치하도록 설정
+     transform:translateX(-50%); // 센터링 보정
+     border-left:${props => props.isActive ? '5px solid transparent' : ''};
+     border-right:${props => props.isActive ? '5px solid transparent' : ''};
+     border-top:${props => props.isActive ? '5px solid black' : ''};
+}
 `;
-
-
 const DropdownMenu = styled.div`
    position: absolute;
    top: calc(100% + .5em);
    right: .5em;
-   background-color: white;
-   box-shadow: rgba(0,0,0,.1) -2px -2px inset, rgba(0,0,0,.1) -2px -2px,
-               rgba(0,0,0,.1) -4px -4px inset,
-               rgba(255,255,255,.5) -4px -4px inset,
-               rgba(255,255,255,.5) -4px -4px;
-   border-radius: .5em;
-   padding: .5em;
-
-   a {
-     display:block;
-     padding:.5em;
-
+   background-color:white; 
    
-   }
+   /* 애니메이션 효과 */
+   opacity:${props => props.isOpen ? '1' : '0'};
+    visibility:${props => props.isOpen ? 'visible' : 'hidden'};
+    transition:.3s ease-in-out;
+
+    box-shadow:
+        rgba(0,0,0,.1) -2px -2px inset,
+        rgba(0,0,0,.1) -2px -2px,
+        rgba(255,255,255,.5) -4px -4px inset,
+        rgba(255,255,255,.5) -4px -4px;
+
+    border-radius:.5em; 
+    padding:.5em;
+
+     a {
+         display:block;
+         padding:.5em;
+
+         /* 호버 효과 추가 */
+         &:hover {
+            color:#495057; // 예시 색상
+            text-decoration:none; // 밑줄 제거
+            cursor:pointer;
+          }
+     }
+    
+  
 `;

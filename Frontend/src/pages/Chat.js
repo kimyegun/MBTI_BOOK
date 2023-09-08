@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import client from '../lib/api/client';
 import styled from '@emotion/styled';
 import { spacing } from '@mui/system'; // 추가된 라인
+import HeaderContainer from '../containers/common/HeaderContainer';
 import {
   TextField,
   Button,
@@ -101,6 +102,8 @@ function Chat() {
   };
 
   return (
+    <>
+    <HeaderContainer />
     <StyledContainer>
       <ChatContainer>
         <Typography
@@ -133,6 +136,7 @@ function Chat() {
         </Box>
       </ChatContainer>
     </StyledContainer>
+    </>
   );
 }
 
@@ -158,13 +162,16 @@ const ChatContainer = styled(Paper)`
   flex-direction: column;
   gap: 1em;
   padding: 1em;
-  max-width: 500px;
+  max-width: 800px;
+    width: calc(100% - 2em); /* 전체 너비에서 패딩을 제외한 크기로 설정합니다 */
   margin: auto;
   border-radius: 12px; // 둥근 모서리를 테두리에 적용합니다.
   background-color: #fff; // 배경색을 설정합니다.
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // 그림자 효과를 추가합니다.
+  
   ${({ theme }) => `
     margin-top: ${spacing(theme, 8)};
+    
   `}
 `;
 
