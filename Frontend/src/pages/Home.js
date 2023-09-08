@@ -7,7 +7,6 @@ import { FaArrowRight } from "react-icons/fa";
 import morning from "../assets/background/morning.jpg";
 
 // mbti 검사 메인 페이지
-
 const Home = () => {
   const navigate = useNavigate(); // 훅을 이용한 navigate 기능
   const handleClickBtn = () => {  // 클릭 시 검사하기 영역으로 이동 함수

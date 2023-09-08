@@ -29,7 +29,7 @@ const buttonStyle = css`
   min-width: 10px;
   width: 110px;
   text-align: center;
-  background: ${palette.cyan[5]};
+  background: ${palette.cyan[0]};
   &:hover {
     background: ${palette.gray[6]};
   }

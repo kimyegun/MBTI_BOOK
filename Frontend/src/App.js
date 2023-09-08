@@ -11,23 +11,15 @@ import Question from './pages/Question';
 import Result from './pages/Result';
 import Resultdetail from './pages/ResultDetail';
 import Chat from './pages/Chat';
-
 import styled from "styled-components";
 
-
-
-
 // Router 경로 설정
-
 const App = () => {
-
-
   return (
   <>
     <Helmet>
       <title>MBTI</title>
     </Helmet>
-
     <Routes>
       {/* mbti 검사 메인페이지 router */}
       <Route path="/Home" element={<Home />} />
@@ -49,17 +41,15 @@ const App = () => {
       <Route path="/write" element={<WritePage />} />
        {/* 검사 결과 상세 화면 router */}
       <Route path='/Resultdetail' element={<Resultdetail/>}/>
-
       <Route path="/:username">
         <Route index element={<PostListPage/>} />
         <Route path=":postId" element={<PostPage />} />
       </Route>
-
     </Routes>
   </>
-
   );
 };
+
 export const StyledContainer = styled.div`
   width: 100%;
   min-width: 300px;
@@ -74,7 +64,7 @@ export const StyledContainer = styled.div`
   margin: 0 auto;
   left: 0;
   right: 0;
-  top: 20%;
+  top: 10;
 `;
 
 export const StyledBtn = styled.button`

@@ -70,12 +70,12 @@ function Chat() {
     //GPT API로 메시지를 전송하고 응답을 받는 비동기 함수입니다.
     conversation.push({ role: 'user', content: userMessage });
 
-    const api_key = "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";
+    const api_key = "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";
     //GPT-3.5-turbo를 사용하여 대화를 위한 API 요청을 생성하고 전송 후 응답을 처리합니다.
     const postData = JSON.stringify({
       model: "gpt-3.5-turbo",
       messages: conversation,
-      max_tokens: 100,
+      max_tokens: 300,
     });
 
     try {

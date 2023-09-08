@@ -5,9 +5,22 @@ import styled from "styled-components";
 import { StyledContainer } from "../App";
 import { QuestionData } from "../assets/data/questiondata";
 import after from '../assets/background/afternoon.jpg';
+import { MdPlayArrow, MdPause, MdStop } from 'react-icons/md';
 
 // 질문 컴포넌트 state 생성, 관리를 위한 함수
 const Question = () => {
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleBgm = () => {
+     setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+  };
+
+  const stopBgm = () => {
+     setIsPlaying(false);
+     // Stop logic here
+  };
+
   // 특정 URL이동을 위한 navigate 생성
   const navigate = useNavigate();
   const [questionNo, setQuestionNo] = useState(0);
@@ -63,7 +76,28 @@ const Question = () => {
 
   return (
     <AuthTemplateBlock>
-    <StyledContainer padding={"50px"}>
+
+        <BgmPlayerContainer>
+    
+         <ControlsBox>
+            <IconButton onClick={toggleBgm}>
+               {isPlaying ? <MdPause /> : <MdPlayArrow />}
+            </IconButton>
+            {isPlaying && (
+               <IconButton onClick={stopBgm}>
+                  <MdStop />
+               </IconButton>
+            )}
+         </ControlsBox>
+         {isPlaying && (
+            <audio src="/bgm.mp3" autoPlay loop />
+         )}
+      </BgmPlayerContainer>
+
+      
+   
+    <StyledContainer padding={"50px"}  >
+      
       <ProgressBar
         striped
         variant="warning"
@@ -108,11 +142,44 @@ const Question = () => {
         </Button>
       </ButtonGroup>
     </StyledContainer>
+
     </AuthTemplateBlock>
   );
 };
 
 export default Question;
+
+
+
+const BgmPlayerContainer = styled.div`
+position: fixed;
+top: 20px;
+right: 20px;
+padding: 20px;
+`;
+
+
+const ControlsBox = styled.div`
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center;
+  border-radius: 100px; /* radius 추가 */
+  background-color: #CD853F; /* 박스 배경색 설정 */
+   width: fit-content; /* 내용에 맞게 너비 조정 */
+   padding-left:30px;
+   padding-right :30px;
+   height: 50px; /* 높이 조정 */
+`;
+
+const IconButton = styled.button`
+padding: 5px;
+background-color: #52E252;
+border: none; 
+border-radius: 25%; 
+&:not(:last-child) {
+ margin-right: 8px; 
+}
+`;
 
 // 질문페이지 전체 영역 styled
 
@@ -139,8 +206,8 @@ const Title = styled.div`
   font-size: 15pt;
   text-align: center;
   font-family: "Jua";
-  margin-top: 50px;
-  margin-bottom: 20px;
+  margin-top: 75px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;

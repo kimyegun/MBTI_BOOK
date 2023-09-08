@@ -1,7 +1,9 @@
 import './Resultdetail.css'
 import { useState } from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+
+import Button from '../components/common/Button';
+
 
 // 추천 도서 상세 설명을 위한 배열 - E를 위한 추천 도서 1번째 배열
 
@@ -285,14 +287,11 @@ const Resultdetail = () => {
                                     </HoverText>
                                 </HoverableImageContainer>
                                 ))}
-
-                 
-            
-
-
                     </div>
                 </div>
-                <Link to="/">메인화면</Link>
+                <ButtonContainer>
+                <Button to="/">메인화면</Button>
+                </ButtonContainer>
                 {/* Repeat the above structure for other recommend_list sections */}
                 {/* Add homepage button */}
             </div>
@@ -323,5 +322,12 @@ const HoverText = styled.div`
   transition: opacity 0.3s ease;
   overflow: auto;
 `;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+`;
+
 
 export default Resultdetail;

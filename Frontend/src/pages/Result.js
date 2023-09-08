@@ -100,6 +100,8 @@ export default Result;
 
 //  mbti 결과 페이지 영역 styled
 
+
+
 const AuthTemplateBlock = styled.div`
   position: absolute;
   left: 0;
